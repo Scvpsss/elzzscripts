@@ -321,51 +321,39 @@ TOOLS_SETUP() {
 }
 
 DOMENS_SETUP() {
-clear
-# === CREDENTIAL CLOUDFLARE ===
-CF_ID="danijhi098@gmail.com"
-CF_KEY="9aZi5DDnoBarEVyXCFsN_oNorhILf0IWMIDWMz51"
+  clear
+  CF_TOKEN="9aZi5DDnoBarEVyXCFsN_oNorhILf0IWMIDWMz51"   # token API yang baru kamu dapat
 
-# === DOMAIN UTAMA ===
-DOMAIN="zect-store.my.id"
-IPVPS=$(curl -s ipv4.icanhazip.com)
+  DOMAIN="zect-store.my.id"
+  IPVPS=$(curl -s ipv4.icanhazip.com)
 
-# === Generate Subdomain Random ===
-SUBDOMAIN=$(cat /dev/urandom | tr -dc a-z0-9 | head -c 5)
-RECORD="$SUBDOMAIN.$DOMAIN"
+  SUBDOMAIN=$(tr -dc a-z0-9 </dev/urandom | head -c 5)
+  RECORD="$SUBDOMAIN.$DOMAIN"
 
-# === Get Zone ID dari Cloudflare ===
-ZONE_ID=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones?name=$DOMAIN" \
-     -H "X-Auth-Email: $CF_ID" \
-     -H "X-Auth-Key: $CF_KEY" \
-     -H "Content-Type: application/json" | jq -r .result[0].id)
+  ZONE_ID=$(curl -s "https://api.cloudflare.com/client/v4/zones?name=$DOMAIN" \
+       -H "Authorization: Bearer $CF_TOKEN" \
+       -H "Content-Type: application/json" | jq -r .result[0].id)
 
-# === Cek apakah record sudah ada ===
-RECORD_ID=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records?type=A&name=$RECORD" \
-     -H "X-Auth-Email: $CF_ID" \
-     -H "X-Auth-Key: $CF_KEY" \
-     -H "Content-Type: application/json" | jq -r .result[0].id)
+  RECORD_ID=$(curl -s "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records?type=A&name=$RECORD" \
+       -H "Authorization: Bearer $CF_TOKEN" \
+       -H "Content-Type: application/json" | jq -r .result[0].id)
 
-# === Tambah / Update Record ===
-if [[ "$RECORD_ID" == "null" ]]; then
-  echo "➕ Menambahkan record baru: $RECORD"
-  curl -s -X POST "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records" \
-       -H "X-Auth-Email: $CF_ID" \
-       -H "X-Auth-Key: $CF_KEY" \
-       -H "Content-Type: application/json" \
-       --data "{\"type\":\"A\",\"name\":\"$RECORD\",\"content\":\"$IPVPS\",\"ttl\":120,\"proxied\":false}" > /dev/null
-else
-  echo "🔄 Mengupdate record lama: $RECORD"
-  curl -s -X PUT "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records/$RECORD_ID" \
-       -H "X-Auth-Email: $CF_ID" \
-       -H "X-Auth-Key: $CF_KEY" \
-       -H "Content-Type: application/json" \
-       --data "{\"type\":\"A\",\"name\":\"$RECORD\",\"content\":\"$IPVPS\",\"ttl\":120,\"proxied\":false}" > /dev/null
-fi
+  if [[ "$RECORD_ID" == "null" ]]; then
+    echo "➕ Menambahkan record baru: $RECORD"
+    curl -s -X POST "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records" \
+         -H "Authorization: Bearer $CF_TOKEN" \
+         -H "Content-Type: application/json" \
+         --data "{\"type\":\"A\",\"name\":\"$RECORD\",\"content\":\"$IPVPS\",\"ttl\":120,\"proxied\":false}" | jq
+  else
+    echo "🔄 Mengupdate record lama: $RECORD"
+    curl -s -X PUT "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records/$RECORD_ID" \
+         -H "Authorization: Bearer $CF_TOKEN" \
+         -H "Content-Type: application/json" \
+         --data "{\"type\":\"A\",\"name\":\"$RECORD\",\"content\":\"$IPVPS\",\"ttl\":120,\"proxied\":false}" | jq
+  fi
 
-# === Simpan Hasil Domain ke File (APPEND) ===
-echo "$RECORD" >> /etc/xray/domain 
-echo "$RECORD" >> ~/domain # /root/domain
+  echo "$RECORD" >> /etc/xray/domain
+  echo "$RECORD" >> ~/domain
 }
 
 SSL_SETUP() {
