@@ -5,7 +5,7 @@
 <pre><code>apt update && apt upgrade -y && update-grub && sleep 2 && reboot</pre></code>
 
 ### INSTALL SCRIPT 
-<pre><code>apt install wget -y && wget -q https://raw.githubusercontent.com/RIFQISTORE/elzzscripts/main/waduk.sh && chmod +x waduk.sh && ./waduk.sh
+<pre><code>apt install wget -y && wget -q https://raw.githubusercontent.com/Scvpsss/elzzscripts/main/waduk.sh && chmod +x waduk.sh && ./waduk.sh
 </code></pre>
 
 ### TESTED ON OS 
