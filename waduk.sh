@@ -41,8 +41,8 @@ export IP=$( curl -sS icanhazip.com )
 LUNAREP="https://raw.githubusercontent.com/Scvpsss/elzzscripts/main/"
 
 function ADD_CEEF() {
-EMAILCF="newvpnlunatix293@gmail.com"
-KEYCF="88a8619c3dec8a0c9a14cf353684036108844"
+EMAILCF="danijhi098@gmail.com"
+KEYCF="9aZi5DDnoBarEVyXCFsN_oNorhILf0IWMIDWMz51"
 echo "$EMAILCF" > /usr/bin/emailcf
 echo "$KEYCF" > /usr/bin/keycf
 }
@@ -323,11 +323,11 @@ TOOLS_SETUP() {
 DOMENS_SETUP() {
 clear
 # === CREDENTIAL CLOUDFLARE ===
-CF_ID="newvpnlunatix293@gmail.com"
-CF_KEY="88a8619c3dec8a0c9a14cf353684036108844"
+CF_ID="danijhi098@gmail.com"
+CF_KEY="9aZi5DDnoBarEVyXCFsN_oNorhILf0IWMIDWMz51"
 
 # === DOMAIN UTAMA ===
-DOMAIN="execshell.cloud"
+DOMAIN="zect-store.my.id"
 IPVPS=$(curl -s ipv4.icanhazip.com)
 
 # === Generate Subdomain Random ===
