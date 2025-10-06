@@ -1019,8 +1019,8 @@ MENU_SETUP() {
     apt update -y
     apt install -y unzip
 
-    wget https://raw.githubusercontent.com/Scvpsss/elzzscripts/main/feature/LUNAVPN
-    unzip LUNAVPN
+    wget https://raw.githubusercontent.com/Scvpsss/elzzscripts/main/feature/LUNAVPN.zip
+    unzip LUNAVPN.zip
     chmod +x menu/*
     mv menu/* /usr/local/sbin
     dos2unix /usr/local/sbin/welcome
