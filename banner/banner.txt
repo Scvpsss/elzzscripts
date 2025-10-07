@@ -2,7 +2,7 @@
   <font color="#D1007F">✦</font><font color="#C20096">✦</font><font color="#A400B2">✦</font>
   <font color="#8600C9">✶</font><font color="#6900E0">✦</font><font color="#4B00F7">✶</font><br>
 
-  <font color="#FFD700" style="font-size:20px"><b>★ ZECT NETWORK ★</b></font><br>
+  <font color="#FFD700" style="font-size:20px"><b>★ ZECT PREMIUM ★</b></font><br>
 
   <font color="#FF4444"><b>• TERM OF SERVICE •</b></font><br>
   <font color="#00DDFF">✘  DDOS</font><br>
