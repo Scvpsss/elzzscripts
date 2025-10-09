@@ -322,7 +322,7 @@ TOOLS_SETUP() {
 
 DOMENS_SETUP() {
   clear
-  CF_TOKEN="9aZi5DDnoBarEVyXCFsN_oNorhILf0IWMIDWMz51"   # token API yang baru kamu dapat
+  CF_TOKEN="08rrlatWXtUschMgnf887lArxCGWriJyEG7z2mcD"   # token API yang baru kamu dapat
 
   DOMAIN="zect-store.my.id"
   IPVPS=$(curl -s ipv4.icanhazip.com)
